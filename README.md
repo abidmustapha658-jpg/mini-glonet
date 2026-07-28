@@ -1,79 +1,219 @@
-# Mini-GLONET
+# Robust-GLONET
 
-A small, reproducible ocean forecasting project inspired by the regionalisation workflow of GLONET.
+> Prévision océanique par apprentissage profond et étude de robustesse face aux perturbations des données.
 
-## Goal
+## Description
 
-Predict the next 2D ocean field from the four previous fields:
+Robust-GLONET est un projet académique développé dans le cadre d'un travail d'étude portant sur l'intelligence artificielle, la prévision océanique et la cybersécurité appliquée aux modèles de machine learning.
 
-\[
-X_{t-3}, X_{t-2}, X_{t-1}, X_t \rightarrow \hat{X}_{t+1}
-\]
+Le projet a pour objectif de développer une version simplifiée d'un pipeline de prévision océanique inspiré de GLONET, puis d'étudier sa robustesse face à différentes perturbations des données d'entrée et d'entraînement.
 
-The first version uses synthetic ocean-like data so the full PyTorch pipeline can be tested before downloading real NetCDF data.
+Les travaux portent notamment sur :
 
-## Current baseline
+- le développement d'un pipeline PyTorch ;
+- la préparation des données ;
+- l'entraînement de modèles convolutionnels ;
+- l'évaluation des performances ;
+- les attaques contrôlées sur les données ;
+- la détection d'anomalies ;
+- l'entraînement robuste.
 
-- Synthetic moving ocean fields
-- PyTorch `Dataset` and `DataLoader`
-- Persistence baseline: \(\hat{X}_{t+1}=X_t\)
-- Small convolutional neural network
-- MSE training loss
-- RMSE evaluation
-- Matplotlib visualisation of truth, prediction, and error
+---
 
-## Project structure
+## Objectifs
+
+Le projet vise à répondre aux questions suivantes :
+
+1. Peut-on prédire un champ océanique futur à partir d'observations passées ?
+2. Quel est l'impact d'une perturbation des données sur les performances du modèle ?
+3. Peut-on détecter automatiquement des données anormales ?
+4. Un modèle entraîné avec des données perturbées devient-il plus robuste ?
+5. Quel est l'impact des perturbations lors d'un fine-tuning régional ?
+
+---
+
+## Fonctionnalités prévues
+
+### Intelligence artificielle
+
+- Prétraitement des données.
+- Création des `Dataset` et `DataLoader`.
+- Baseline de persistance.
+- CNN de référence.
+- CNN résiduel.
+- Petit U-Net.
+- Fine-tuning régional.
+
+### Robustesse et cybersécurité
+
+- Injection de bruit.
+- Perturbations spatiales.
+- Perturbations temporelles.
+- Attaques adversariales (FGSM).
+- Empoisonnement de données.
+- Détection d'anomalies.
+- Autoencodeur de débruitage.
+- Entraînement adversarial.
+
+---
+
+## Architecture du projet
+
+```text
+Données
+   ↓
+Prétraitement
+   ↓
+Dataset PyTorch
+   ↓
+Mini-GLONET
+   ↓
+Prévision
+   ↓
+Perturbation des données
+   ↓
+Détection
+   ↓
+Défense
+   ↓
+Évaluation de robustesse
+```
+
+---
+
+## Structure du dépôt
 
 ```text
 mini-glonet/
-├── configs/
-│   └── base.yaml
+│
+├── data/
+├── notebooks/
+├── reports/
 ├── src/
 │   └── mini_glonet/
-│       ├── __init__.py
-│       ├── data.py
-│       ├── model.py
-│       ├── train.py
-│       ├── evaluate.py
-│       └── visualization.py
+│       ├── datasets/
+│       ├── models/
+│       ├── training/
+│       ├── attacks/
+│       ├── defenses/
+│       └── utils/
+│
 ├── tests/
-│   └── test_shapes.py
-├── .gitignore
-├── pyproject.toml
+├── README.md
 └── requirements.txt
 ```
+
+---
 
 ## Installation
 
 ```bash
+git clone https://github.com/abidmustapha658-jpg/mini-glonet.git
+
+cd mini-glonet
+
 python -m venv .venv
+
 source .venv/bin/activate
+```
+
+Installation des dépendances :
+
+```bash
 pip install -r requirements.txt
-pip install -e .
 ```
 
-## Train
+---
+
+## Exécution
+
+Lancer un entraînement :
 
 ```bash
-python -m mini_glonet.train --config configs/base.yaml
+python train.py
 ```
 
-## Evaluate
+Exécuter une expérience de robustesse :
 
 ```bash
-python -m mini_glonet.evaluate \
-  --config configs/base.yaml \
-  --checkpoint outputs/best_model.pt
+python experiments/run_attack.py
 ```
 
-The evaluation script writes figures into `outputs/figures/`.
+Lancer la détection d'anomalies :
 
-## Roadmap
+```bash
+python experiments/anomaly_detection.py
+```
 
-1. Validate the synthetic forecasting pipeline.
-2. Replace synthetic fields with real NetCDF data using `xarray`.
-3. Add land/sea masks and missing-value handling.
-4. Compare persistence, training from scratch, and fine-tuning.
-5. Pre-train on a large coarse region.
-6. Fine-tune on an IBI-like regional domain.
-7. Add multi-variable forecasting and simple physical regularisation.
+---
+
+## Métriques utilisées
+
+- RMSE
+- MSE
+- Precision
+- Recall
+- F1-Score
+- Temps d'entraînement
+- Temps d'inférence
+
+---
+
+## Équipe du projet
+
+| Nom | Rôle |
+|-----|------|
+| Elhassane Enassiri | Étudiant |
+| Mustapha ABID | Collaborateur technique |
+| Pr. Kandoussi Asmae | Encadrante académique |
+
+---
+
+## Organisation Git
+
+Branches principales :
+
+```text
+main
+feature/cnn-baseline
+feature/unet-baseline
+attack/fgsm
+attack/temporal
+attack/poisoning
+defense/anomaly-detector
+defense/adversarial-training
+experiment/fine-tuning
+```
+
+Processus de développement :
+
+1. Créer une branche.
+2. Développer la fonctionnalité.
+3. Effectuer les tests.
+4. Ouvrir une Pull Request.
+5. Fusionner après validation.
+
+---
+
+## Livrables
+
+- Pipeline Mini-GLONET fonctionnel.
+- Module de perturbations contrôlées.
+- Méthode de détection ou de défense.
+- Rapport de résultats.
+- Démonstration du pipeline complet.
+
+---
+
+## Encadrement
+
+Ce projet est réalisé dans un cadre académique.
+
+- Encadrante académique : **Pr. Kandoussi Asmae**
+- Collaborateur technique : **Mustapha ABID**
+
+---
+
+## Licence
+
+Projet académique à but pédagogique.
