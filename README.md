@@ -108,7 +108,7 @@ mini-glonet/
 ## Installation
 
 ```bash
-git clone https://github.com/abidmustapha658-jpg/mini-glonet.git
+git clone https://github.com/hassannassiri181-cmyk/mini-glonet.git
 
 cd mini-glonet
 
