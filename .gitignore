@@ -11,3 +11,6 @@ data/processed/
 *.nc
 *.zarr
 .DS_Store
+*.pt
+*.egg-info/
+.project
