@@ -39,9 +39,7 @@ Le projet vise à répondre aux questions suivantes :
 - Prétraitement des données.
 - Création des `Dataset` et `DataLoader`.
 - Baseline de persistance.
-- CNN de référence.
-- CNN résiduel.
-- Petit U-Net.
+- `MiniGlonetCNN`, notre CNN résiduel principal.
 - Fine-tuning régional.
 
 ### Robustesse et cybersécurité
@@ -176,7 +174,6 @@ Branches principales :
 ```text
 main
 feature/cnn-baseline
-feature/unet-baseline
 attack/fgsm
 attack/temporal
 attack/poisoning
