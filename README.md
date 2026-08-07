@@ -217,3 +217,8 @@ Ce projet est réalisé dans un cadre académique.
 ## Licence
 
 Projet académique à but pédagogique.
+
+## Baseline CNN results
+
+The reproducible evaluation report and figures are available in
+[reports/baseline-cnn](reports/baseline-cnn/README.md).
